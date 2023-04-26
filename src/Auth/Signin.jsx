@@ -25,10 +25,9 @@ const Signin= () => {
 
     const register = (e) => {
         e.preventDefault()
-        console.log('chetan');
         const { username, email, password, reEnterPassword } = user
         if( username && email && password && (password === reEnterPassword)){
-            axios.post("http://localhost:3001/register",user)
+            axios.post("https://i-shop-backend-l58p.vercel.app/register",user)
             .then( res => {
                 toast.success('Sign In Successful');
                 navigate('/login')

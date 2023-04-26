@@ -9,7 +9,7 @@ const Ipad = () => {
 
   useEffect(()=>{
     axios
-     .get("http://localhost:3001/ipad")
+     .get("https://i-shop-backend-l58p.vercel.app/ipad")
      .then(res=>{
       setProductList(res.data)
      })

@@ -9,7 +9,7 @@ const Accessories = () => {
 
   useEffect(()=>{
     axios
-     .get("http://localhost:3001/accessories")
+     .get("https://i-shop-backend-l58p.vercel.app/accessories")
      .then(res=>{
       setProductList(res.data)
      })

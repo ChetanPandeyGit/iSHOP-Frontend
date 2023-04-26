@@ -9,7 +9,7 @@ const Macbook = () => {
 
   useEffect(()=>{
     axios
-     .get("http://localhost:3001/macbook")
+     .get("https://i-shop-backend-l58p.vercel.app/macbook")
      .then(res=>{
       setProductList(res.data)
      })

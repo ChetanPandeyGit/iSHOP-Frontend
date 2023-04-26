@@ -32,7 +32,7 @@ const Login = () => {
 	const login = (e) => {
 		e.preventDefault()	
 		try {
-			axios.post("http://localhost:3001/login", user)
+			axios.post("https://i-shop-backend-l58p.vercel.app/login", user)
 			.then(res => {
 				if( res.data.message == 'Logged in successfully'){
 						log = user.email
