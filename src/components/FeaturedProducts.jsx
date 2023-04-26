@@ -30,9 +30,8 @@ const FeaturedProducts = () => {
           </button>
           <ul className="slides-container" ref={slidesContainer}>
             <li className="slide" ref={slide}><HCard pic={pic1} title='Apple Macbook Pro' /><HCard pic={pic2} title='H-Squared Television Tray' /><HCard pic={pic3} title='Netatmo Rain Gauge' /></li>
-            <li className="slide" ref={slide}><img src={pic2} alt="item" /></li>
-            <li className="slide" ref={slide}><img src={pic3} alt="item" /></li>
-
+            <li className="slide" ref={slide}><HCard pic={pic1} title='Apple Macbook Pro' /><HCard pic={pic2} title='H-Squared Television Tray' /><HCard pic={pic3} title='Netatmo Rain Gauge' /></li>
+            <li className="slide" ref={slide}><HCard pic={pic1} title='Apple Macbook Pro' /><HCard pic={pic2} title='H-Squared Television Tray' /><HCard pic={pic3} title='Netatmo Rain Gauge' /></li>
           </ul>
           <button className="slide-arrow" ref={nextButton} id='slide-arrow-next' onClick={handleNext}>
             &#8250;

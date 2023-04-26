@@ -27,6 +27,10 @@
   margin-left: .5rem;
 }
 
+#prof{
+  cursor: pointer;
+}
+
 
 .nav {
   text-align: center;

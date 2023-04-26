@@ -2,9 +2,11 @@ import React, { useState } from 'react'
 import "./styling/login.css"
 import { Link, useNavigate } from 'react-router-dom'
 import axios from "axios"
+import toast from "react-hot-toast";
+export let  log , logged, logout;
 
 const Login = () => {
-
+	const [isLoggedin, setIsLoggedin] = useState(false);
 	const navigate = useNavigate()
 
 	const [ user, setUser] = useState({
@@ -18,22 +20,44 @@ const Login = () => {
             ...user,
             [name]: value
         })
+		localStorage.setItem('token-info', JSON.stringify(user));
+        setIsLoggedin(true);
     }
 
-	const login = () => {
-        axios.post("http://localhost:3001/login", user)
-        .then(res => {
-            alert(res.data.message)
-            navigate('/')
-        })
-    }
+	const logoutUser = () => {
+        localStorage.removeItem('token-info');
+        setIsLoggedin(false);
+    };
+
+	const login = (e) => {
+		e.preventDefault()	
+		try {
+			axios.post("http://localhost:3001/login", user)
+			.then(res => {
+				if( res.data.message == 'Logged in successfully'){
+						log = user.email
+					toast.success('Log In Successful');
+					
+					navigate('/')
+				}
+				else{
+					toast.error('Wrong Inputs')
+				}
+				})		
+			
+		} catch (error) {
+			console.log(error.message);
+		}	
+	}
+	logged = isLoggedin;
+	 logout = logoutUser;
 	return (<>
 		<div className="container" >
 			
 			<div className="form-container log-in-container">
 				<form >
 					<h1>Log in</h1>					
-					<input type="text" name="email" value={user.email} onChange={handleChange} placeholder="Enter your Email"></input>
+					<input type="text" name="email" value={user.email} onChange={handleChange} placeholder="Enter your Email" ></input>
           		   <input type="password" name="password" value={user.password} onChange={handleChange}  placeholder="Enter your Password" ></input>		
 					<button onClick={login}>Log In</button>
 				</form>

@@ -1,9 +1,13 @@
 import React, { useState } from 'react'
 import "./styling/login.css"
-import { Link, useHistory } from 'react-router-dom'
+import { Link,  useNavigate } from 'react-router-dom'
+import axios from 'axios'
+import toast from "react-hot-toast";
 
 const Signin= () => {
-    const history = useHistory()
+
+    const navigate = useNavigate()
+
     const [ user, setUser] = useState({
         username: "",
         email:"",
@@ -19,40 +23,41 @@ const Signin= () => {
         })
     }
 
-    const register = () => {
+    const register = (e) => {
+        e.preventDefault()
+        console.log('chetan');
         const { username, email, password, reEnterPassword } = user
         if( username && email && password && (password === reEnterPassword)){
-            axios.post("http://localhost:3001/register", user)
+            axios.post("http://localhost:3001/register",user)
             .then( res => {
-                alert(res.data.message)
-                history.push('/login')
+                toast.success('Sign In Successful');
+                navigate('/login')
             })
         } else {
-            alert("invlid input")
+            alert("invalid input")
         }
-        
     }
 
 	return (<>
-		<div class="container right-panel-active" >
-			<div class="form-container sign-in-container">
-				<form>	
+		<div className="container right-panel-active" >
+			<div className="form-container sign-in-container">
+				<form onSubmit={register}>	
 				<h1>Sign in</h1>	
                 <input type="text" name="username" value={user.name} placeholder="Your Name" onChange={ handleChange }></input>
             <input type="text" name="email" value={user.email} placeholder="Your Email" onChange={ handleChange }></input>
             <input type="password" name="password" value={user.password} placeholder="Your Password" onChange={ handleChange }></input>
             <input type="password" name="reEnterPassword" value={user.reEnterPassword} placeholder="Re-enter Password" onChange={ handleChange }></input>
-					<button onClick={register}>Sign In</button>
+					<button >Sign In</button>
 				</form>
 			</div>
 	
-			<div class="overlay-container ">
-				<div class="overlay ">
-					<div class="overlay-panel overlay-left ">
+			<div className="overlay-container ">
+				<div className="overlay ">
+					<div className="overlay-panel overlay-left ">
 						<h1>Welcome Back!</h1>
 						<p>To keep connected with us please login with your personal info</p>
 						
-                        <Link to={'/login'}><button class="ghost"  >Log In</button></Link>
+                        <Link to={'/login'}><button className="ghost"  >Log In</button></Link>
 					</div>
 				
 				</div>
